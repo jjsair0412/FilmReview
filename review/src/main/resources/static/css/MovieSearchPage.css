@@ -1,0 +1,37 @@
+.title img{
+    width: 50px;
+}
+
+#LoginArea{
+    cursor: pointer;
+}
+.Searchcontainer {
+    justify-content: space-around;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.SearchResult{
+    width: 30%;
+    display: block;
+}
+
+.searchMoviePoster {
+    width :100%;
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+.searchMovieName {
+    height: 25px;
+    font-size: 1.2em;
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.searchMovieName:hover{
+    color: rgba(189, 68, 68, 0.79);
+    transition: all .5s ease;
+}

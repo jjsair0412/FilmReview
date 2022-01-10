@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>manager Pw Change</title>
+    <link rel="stylesheet" th:href="@{/css/managerPwChange.css}">
+</head>
+<body>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<h1>관리자 정보</h1>
+<form th:action method="post" th:object="${mangerInfo}" name="form">
+    <input type="hidden" name="_method" value="PATCH"/>
+    <div class="content">
+        <div class="ID">아이디</div>
+        <div th:name="id" th:text="*{id}" class="IDWrote">ID</div><!--관리자의 아이디가 보여야함-->
+
+        <div class="PW">기존 비밀번호</div>
+        <text th:text="*{password}" class="PWWrote"></text>
+
+        <div class="NewPW">바꿀 비밀번호</div>
+        <input type="password" th:field="*{password}" class="NewPWWrote"><!--새로운 비밀번호 입력창-->
+
+        <div class="NewPWAgain">바꿀 비밀번호 확인</div>
+        <input type="password" class="NewPWAgainWrote">
+
+        <div class="movieDelete">삭제할 영화이름 입력</div>
+        <input type="text" id="movieName">
+        <input type="button" id="deleteMovie" value="영화 삭제">
+    </div>
+    <div class="answer">
+        <input type="submit" value="비밀번호 변경하기">
+        <input type="button" value="영화 등록하기" th:onclick="|location.href='@{/Upload}'|">
+        <input type="button" value="나가기" th:onclick="|location.href='@{/}'|">
+    </div>
+</form>
+<form th:action="@{/MyPage/delete}" th:method="post" class="answer">
+    <input type="hidden" name="_method" value="delete"/>
+    <input type="submit" value="회원 탈퇴하기">
+</form>
+<script th:src="@{/js/MovieDeleteFunc/MovieDeleteCheckFunc.js}"></script>
+</body>
+</html>
