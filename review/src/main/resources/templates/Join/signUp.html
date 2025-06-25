@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>sign up</title>
+    <link rel="stylesheet" href="/css/signUp.css">
+    <link rel="stylesheet" th:href="@{/css/signUp.css}">
+
+</head>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<body>
+<form th:action th:object="${JoinForm}" th:method="post">
+    <div id="join">
+        <h1>회원가입</h1>
+        <table>
+            <tr>
+                <td>ID</td>
+                <td>
+                    <label>
+                        <input type="text" th:name="id" th:field="*{id}" th:errorclass="field-error">
+                        <div class="field-error" th:errors="*{id}">
+                            id 오류
+                        </div>
+
+                    </label>
+                </td>
+            </tr>
+
+            <tr>
+                <td>비밀번호</td>
+                <td>
+                    <label>
+                        <input type="password" th:name="password" th:field="*{password}" th:errorclass="field-error">
+                        <div class="field-error" th:errors="*{password}">
+                            password 오류
+                        </div>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>비밀번호 확인</td>
+                <td><label>
+                    <input type="password">
+                </label></td>
+            </tr>
+            <tr>
+                <td>관리자입니까?</td>
+                <td>
+                    <label>
+                        <input type="checkbox" name="checkbutton" onclick="f_check()">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>관리자 번호</td>
+                <td>
+                    <label>
+                        <input type="text" name="textbox" th:field="*{number}">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>e-mail</td>
+                <td>
+                    <label>
+                        <input type="email" id="email" name="email" th:field="*{email}" th:errorclass="field-error">
+                        <input type="button" id="SendJoinCode" value="인증번호 전송">
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>e-mail 인증번호</td>
+                <td>
+                    <label>
+                        <input type="text" name="emailCheck" th:field="*{joinCode}" th:errorclass="field-error">
+                        <input type="button" id="CodeComparison" value="인증확인">
+                        <div class="field-error" th:errors="*{joinCode}">
+                            인증번호 오류
+                        </div>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="answer">
+                    <input type="button" value="메인페이지로 나가기" th:onclick="|location.href='@{/}'|">
+                    <input type="submit" value="가입하기">
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>
+<script th:src="@{/js/JoinFunc_Email_certification/EmailCertificationFunc.js}"></script>
+</body>
+</html>

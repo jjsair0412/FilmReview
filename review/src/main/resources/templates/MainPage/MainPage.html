@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel='stylesheet' th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <script src="https://kit.fontawesome.com/cffe88607d.js" crossorigin="anonymous"></script>
+</head>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="/webjars/sockjs-client/sockjs.min.js"></script>
+<script src="/webjars/stomp-websocket/stomp.min.js"></script>
+<body>
+<header>
+    <div class="Info">
+        <div class="mypage">
+            <a href="MyPage">마이페이지</a>
+        </div>
+        <div id="LoginArea" class="logIn">
+        </div>
+        <a href="Join">회원가입</a>
+    </div>
+    <div class="title">
+        <b>Fresh Pizza</b>
+    </div>
+    <div class="base">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="영화 제목을 검색해보세요!" id="movieName" name="movieName"
+                   aria-label="Recipient's username" aria-describedby="button-addon2">
+            <button class="btn btn-outline-secondary" type="button" id="movieView"><i class="fas fa-search"></i>
+            </button>
+        </div>
+    </div>
+</header>
+<div id="greetings"></div> <!-- 새로운영화 알람 붙는부분 -->
+
+<div id="container">
+    <th:block th:each="borads : ${boardList}">
+        <div id="columns">
+            <img class="moviePoster" th:src="@{/moviePhoto/}+${borads.getPhotoOriName}"
+                 th:onclick="goMoviePage([[${borads.getPhotoOriName}]]);">
+            <figure id="movieNames" class="movieName" th:text="${borads.getMovieName()}"
+                    th:onclick="goMoviePage([[${borads.getPhotoOriName}]]);"></figure>
+        </div>
+    </th:block>
+</div>
+
+<div id="page_move_div">
+    <nav aria-label="Page navigation example" class="page_move">
+        <ul class="pagination">
+            <a class="page-link" th:href="@{/?page=}+${nowPage-1}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+            <li class="page-item" th:each="page : ${#numbers.sequence(0,totalPage -1)}">
+                <a th:href="@{/?page=}+${pageStat.index}" th:text="${pageStat.index+1}"></a>
+            </li>
+            <a class="page-link" th:href="@{/?page=}+${nowPage+1}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </ul>
+    </nav>
+</div>
+<script th:src="@{/js/LoginOrLogOutFunc/LoginOrLogOutFunc.js}"></script>
+<script th:inline="javascript">
+    let newVar = [[${AllPizzaShape}]];
+    let SessionId = [[${SessionId}]];
+    loginOrLogOutCheck(SessionId)
+</script>
+<script th:src="@{/js/WebSocketJs/socketConnect.js}"></script>
+<script th:src="@{/js/MainPizzaShapeFunc/pizzaShape.js}"></script>
+<script th:src="@{/js/SearchFunc/SearchFunc.js}"></script>
+</body>
+</html>
